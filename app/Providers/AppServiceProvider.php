@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Article;
 use App\Discussion;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
@@ -18,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $lang = config('app.locale') != 'zh_cn' ? config('app.locale') : 'zh';
         \Carbon\Carbon::setLocale($lang);
+        Schema::defaultStringLength(191);
 
         Relation::morphMap([
             'discussions' => Discussion::class,
